@@ -1,14 +1,14 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, request
 
 app = Flask(__name__)
 
-counts = 0
+counts = {'GET': 0, 'POST': 0, 'PUT': 0, 'DELETE': 0}
 
 
 @app.route('/request-counter/', methods=['GET', 'POST', 'PUT', 'DELETE'])
 def request_counter():
     global counts
-    counts += 1
+    counts[request.method] += 1
     return redirect(url_for('index'))
 
 
