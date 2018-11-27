@@ -1,4 +1,4 @@
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, url_for
 
 app = Flask(__name__)
 
@@ -9,8 +9,14 @@ counts = 0
 def request_counter():
     global counts
     counts += 1
-    print(counts)
-    return str(counts)
+    return redirect(url_for('index'))
+
+
+@app.route('/statistics/')
+def statistics():
+    global counts
+    return render_template('statistics.html', counts=counts)
+
 
 
 @app.route('/')
