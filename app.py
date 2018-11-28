@@ -29,15 +29,14 @@ def load_counts():
     with open("counts.txt") as f:
         csv_reader = csv.reader(f, delimiter=':')
         for row in csv_reader:
-            print(row)
-            counts[row[0]] = int(counts[row[1]])
+            counts[row[0]] = int(row[1])
     return counts
 
 
 def save_counts(counts):
     print("counts")
     print(counts)
-    with open("counts.txt") as f:
+    with open("counts.txt", "w") as f:
         csv_writer = csv.writer(f, delimiter=':')
         for row in counts:
             csv_writer.writerow([row, counts[row]])
